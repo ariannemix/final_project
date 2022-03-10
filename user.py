@@ -50,8 +50,6 @@ class User():
                 self.quit_menu()
             else:
                 print("\nInvalid input.")
-        """can only view their own competency and assessment data. 
-        They should have the ability to edit their own user data such as changing their name and editing their own password."""
     
     def view_data(self,user):
         print(f"\nAssessment Data for {user[1]} {user[2]}:")
@@ -79,7 +77,9 @@ class User():
                 print(f"\nCurrent user information for {user[1]} {user[2]}:")           
                 print(f"\n{'ID':<7}{'First Name':<15}{'Last Name':<15}{'Phone':<14}{'Email':<30}\n{'-'*90}")
                 print(f"{user[0]:<7}{user[1]:<15}{user[2]:<15}{user[3]:<14}{user[5]:<30}")
-            change = input(f"\nWhat would you like to update?\n(1) First name\n(2) Last Name\n(3) Phone Number\n(4) Password or\n(5) Email\n>>> ")
+            change = input(f"\nWhat would you like to update?\n(1) First name\n(2) Last Name\n(3) Phone Number\n(4) Password or\n(5) Email or\n(0) To return to navigation\n>>> ")
+            if change == '0':
+                return
             user_dic = dict(zip([1,2,3,4,5], ['first_name', 'last_name', 'phone', 'password', 'email']))
             try:
                 change = int(change)
