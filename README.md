@@ -4,3 +4,4 @@
  
  In order to access the full scope of the program, users will need manager access. You can get this using Cami Cardosa's account (Email: ccdosa@hotmail.com, Password: password!). For user access, use Claire Jones account (Email: cjonesy@gmail.com, Password: ihw55jjj)
  
+ Run main.py to begin.
