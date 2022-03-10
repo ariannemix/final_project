@@ -60,12 +60,12 @@ class viewRecord:
         WHERE c.competency_id = ?"""
         value = (action,)
         assessment_info = self.cursor.execute(query,value).fetchall()
-        print(f"\nScores for {assessment_info[0][0]} competency:")
-        print(f"\n{'First Name':<15}{'Last Name':<15}{'Score':<8}{'Assessment Name':<30}\n{'-'*70}")
         if assessment_info == []:
-            print(f"No current assessments for this competency")
+            print(f"\nNo current assessments for this competency")
             return
         for assessment in assessment_info:
+            print(f"\nScores for {assessment_info[0][0]} competency:")
+            print(f"\n{'First Name':<15}{'Last Name':<15}{'Score':<8}{'Assessment Name':<30}\n{'-'*70}")
             print(f"{assessment[1]:<15}{assessment[2]:<15}{assessment[3]:<8}{assessment[4]:<15}")
 
     def view_one_user_assessments(self):

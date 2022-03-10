@@ -14,7 +14,7 @@ class Manager(User):
             print(
                 f"\n*Welcome to the Manager navigation menu.*\n\nPlease select from the following options:")
             action = input("(1) View Data\n(2) Search for Records\n(3) Add a record\n"
-                           "(4) Manage CSV files\n(5) Create a PDF\n(6) Edit a record\n(7) Delete an Assessment Result\n"
+                           "(4) Manage CSV files\n(5) Edit a record\n(6) Delete an Assessment Result\n"
                            "(0) Quit\n>>> ")
             if action == '1':
                 self.view_data()
@@ -25,10 +25,8 @@ class Manager(User):
             elif action == '4':
                 self.manage_csv()
             elif action == '5':
-                self.create_pdf()
-            elif action == '6':
                 self.edit_record()
-            elif action == '7':
+            elif action == '6':
                 self.delete_result()
             elif action == '0':
                 self.quit_menu()
