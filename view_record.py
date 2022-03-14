@@ -29,7 +29,7 @@ class viewRecord:
         FROM Assessment_Results ar JOIN Assessments a ON a.assessment_id = ar.assessment_id WHERE ar.user_id = ?"""
         value = (action,)
         assessment_data = self.cursor.execute(query,value).fetchall()
-        print(f"\n{'Assessment Name':<30}{'Competency Name':<20}{'Score':<8}{'Date Taken':<15}\n{'-'*60}")
+        print(f"\n{'Assessment Name':<30}{'Competency Name':<20}{'Score':<8}{'Date Taken':<15}\n{'-'*75}")
         if assessment_data == []:
             print("No current assessments for this user")
         else:
@@ -39,10 +39,10 @@ class viewRecord:
     def view_by_competency(self):
         query = "SELECT * FROM Competencies"
         competencies = self.cursor.execute(query).fetchall()
-        print(f"\n{'Competency ID':<5}{'Competency Name':<30}{'Date Created':<14}\n{'-'*60}")
+        print(f"\n{'Competency ID':<18}{'Competency Name':<30}{'Date Created':<14}\n{'-'*60}")
         competency_ids = []
         for competency in competencies:
-            print(f"{competency[0]:<5}{competency[1]:<30}{competency[2]:<14}")
+            print(f"{competency[0]:<18}{competency[1]:<30}{competency[2]:<14}")
             competency_ids.append(competency[0])
         action = input("\nEnter the ID of the competency whose user scores you would like to view: ")
         try:
@@ -63,9 +63,10 @@ class viewRecord:
         if assessment_info == []:
             print(f"\nNo current assessments for this competency")
             return
+        competency_name = assessment_info[0][0]
+        print(f"\nScores for {competency_name}:")
+        print(f"\n{'First Name':<15}{'Last Name':<15}{'Score':<8}{'Assessment Name':<30}\n{'-'*70}")
         for assessment in assessment_info:
-            print(f"\nScores for {assessment_info[0][0]} competency:")
-            print(f"\n{'First Name':<15}{'Last Name':<15}{'Score':<8}{'Assessment Name':<30}\n{'-'*70}")
             print(f"{assessment[1]:<15}{assessment[2]:<15}{assessment[3]:<8}{assessment[4]:<15}")
 
     def view_one_user_assessments(self):

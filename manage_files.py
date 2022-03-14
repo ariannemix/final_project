@@ -68,7 +68,7 @@ class manageFiles():
                         FROM Assessment_Results ar
                         JOIN Assessments a ON a.assessment_id = ar.assessment_id"""
             information = self.cursor.execute(query).fetchall()
-            header = ['user_id', 'Assessment ID', 'Score', 'Date_Taken']
+            header = ['user_id', 'assessment_id', 'score', 'date_taken']
             l = []
             for info in information:
                 user_info = [i for i in info]

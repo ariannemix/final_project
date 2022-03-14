@@ -72,9 +72,11 @@ class Manager(User):
         edit_record = editRecord(self.cursor, self.connection)
 
         action = input("\nWhich records would you like to edit?\n(1) User information\n"
-                       "(2) A Competency \n(3) An Assessment Name\n(4) An Assessment Result\n>>> ")
+                       "(2) An Assessment Name \n(3) An Assessment Result\n>>> ")
         if action == '1':
             user = edit_record.edit_user()
+            if user == None:
+                return
             self.edit_data(user)
             return
         elif action == '2':
@@ -108,11 +110,14 @@ class Manager(User):
         except:
             print("\nInvalid ID")
             return
-        query = "DELETE FROM Assessment_Results WHERE result_id = ?"
-        value = (result_id,)
-        self.cursor.execute(query, value)
-        self.connection.commit()
-        print("\nResult successfully deleted.")
+        if result_id in result_ids:
+            query = "DELETE FROM Assessment_Results WHERE result_id = ?"
+            value = (result_id,)
+            self.cursor.execute(query, value)
+            self.connection.commit()
+            print("\nResult successfully deleted.")
+        else:
+            print(f"\nInvalid ID")
         self.navigate()
 
     def manage_files(self):
@@ -132,7 +137,7 @@ class Manager(User):
         name = input(
             f"Enter the first or last name of the person whose profile you would like to view: ")
         query = "SELECT user_id, first_name, last_name, phone, email, date_created FROM Users WHERE first_name LIKE ? OR last_name LIKE ?"
-        values = (name, name)
+        values = (f"%{name}%", f"%{name}%")
         try:
             user = self.cursor.execute(query, values).fetchall()
         except:

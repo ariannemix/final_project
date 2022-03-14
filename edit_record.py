@@ -21,10 +21,12 @@ class editRecord():
             return
         if action not in self.user_ids:
             print("\nInvalid user ID.")
-            return
+            return 
         query = "SELECT * FROM Users WHERE user_id = ?"
         value = (action,)
         users = self.cursor.execute(query,value)
+        if users == []:
+            return
         for user in users:
             user = [i for i in user]
             return user
@@ -32,9 +34,9 @@ class editRecord():
     def edit_assessment(self):
         query = "SELECT * FROM Assessments"
         assessments = self.cursor.execute(query).fetchall()
-        print(f"\n{'ID':<8}{'Assessment Name':<30}{'Competency Name':<20}{'Date Created':<15}\n{'-'*80}")
+        print(f"\n{'ID':<8}{'Assessment Name':<30}{'Date Created':<15}{'Competency Name':<20}\n{'-'*80}")
         for assessment in assessments:
-            print(f"{assessment[0]:<8}{assessment[1]:<30}{assessment[2]:<20}{assessment[3]:<15}")
+            print(f"{assessment[0]:<8}{assessment[1]:<30}{assessment[3]:<15}{assessment[2]:<20}")
         action = input("\nEnter the ID of the assessment you would like to edit: ")
         try:
             action = int(action)
